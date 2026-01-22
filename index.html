@@ -99,6 +99,14 @@
         #map {
             height: calc(100vh - 140px);
             background-color: #1e293b;
+            /* Tactical dark filter for better visibility */
+            filter: brightness(0.85) contrast(1.1) saturate(0.7);
+        }
+        
+        /* Keep map controls visible */
+        .leaflet-control-zoom a,
+        .leaflet-control-attribution {
+            filter: brightness(1.3);
         }
         
         .danger-card {
@@ -1847,10 +1855,10 @@
         function initMap() {
             map = L.map('map').setView([59.4370, 24.7536], 13);
             
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 20
+            // Use OpenStreetMap with darker style for tactical use
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 19
             }).addTo(map);
             
             map.on('click', function(e) {
